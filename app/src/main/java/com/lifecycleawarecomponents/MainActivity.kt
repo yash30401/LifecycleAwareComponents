@@ -1,16 +1,28 @@
 package com.lifecycleawarecomponents
 
+import ViewModel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var viewModel: ViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         lifecycle.addObserver(Observer())
         Log.d("Main","Activity - OnCreate")
+
+        viewModel = ViewModelProvider(this).get(ViewModel::class.java)
+
+        viewModel.listFruits.observe(this, androidx.lifecycle.Observer {
+            Log.d("Main",it.toString())
+        })
+
     }
 
     override fun onStart() {
