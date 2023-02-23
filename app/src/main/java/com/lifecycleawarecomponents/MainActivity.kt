@@ -6,14 +6,17 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.lifecycleawarecomponents.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    var count:Int=0
+
     lateinit var viewModel: ViewModel
+    private lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding= ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         lifecycle.addObserver(Observer())
         Log.d("Main","Activity - OnCreate")
@@ -25,7 +28,17 @@ class MainActivity : AppCompatActivity() {
         })
 
 
+        binding.counter.text=viewModel.count.toString()
 
+        binding.btnIncrease.setOnClickListener {
+            increase()
+        }
+
+    }
+
+    private fun increase() {
+        viewModel.icrease()
+        binding.counter.text=viewModel.count.toString()
     }
 
     override fun onStart() {
