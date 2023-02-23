@@ -1,17 +1,16 @@
 package com.lifecycleawarecomponents
 
-import ViewModel
+import counterViewModel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lifecycleawarecomponents.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
 
-    lateinit var viewModel: ViewModel
+    lateinit var viewModel: counterViewModel
     private lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,14 +20,14 @@ class MainActivity : AppCompatActivity() {
         lifecycle.addObserver(Observer())
         Log.d("Main","Activity - OnCreate")
 
-        viewModel = ViewModelProvider(this).get(ViewModel::class.java)
+        viewModel = ViewModelProvider(this,ViewModelFactory(10)).get(counterViewModel::class.java)
 
         viewModel.listFruits.observe(this, androidx.lifecycle.Observer {
             Log.d("Main",it.toString())
         })
 
 
-        binding.counter.text=viewModel.count.toString()
+        setText()
 
         binding.btnIncrease.setOnClickListener {
             increase()
@@ -36,9 +35,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun setText(){
+        binding.counter.text=viewModel.count.toString()
+    }
     private fun increase() {
         viewModel.icrease()
-        binding.counter.text=viewModel.count.toString()
+        setText()
     }
 
     override fun onStart() {

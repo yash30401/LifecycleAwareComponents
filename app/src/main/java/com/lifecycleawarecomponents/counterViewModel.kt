@@ -1,12 +1,12 @@
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-class ViewModel:androidx.lifecycle.ViewModel() {
+class counterViewModel(val initialVal:Int):androidx.lifecycle.ViewModel() {
 
     private lateinit var fruits: MutableLiveData<String>
     val listFruits:LiveData<String>
 
-    var count:Int=0
+    var count:Int=initialVal
 
     init {
         fruits=MutableLiveData("Apple")
