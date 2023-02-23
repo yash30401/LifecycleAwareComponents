@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
 
+    var count:Int=0
     lateinit var viewModel: ViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.listFruits.observe(this, androidx.lifecycle.Observer {
             Log.d("Main",it.toString())
         })
+
+
 
     }
 
