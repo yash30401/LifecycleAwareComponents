@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("Main",it.toString())
         })
 
+        //Few changes
 
         setText()
 
