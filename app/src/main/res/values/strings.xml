@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LifecycleAwareComponents</string>
+    <string name="flow_activity">FLOW ACTIVITY</string>
 </resources>
