@@ -10,10 +10,7 @@ import com.lifecycleawarecomponents.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consume
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.count
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -64,6 +61,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity,FlowActivity::class.java)
             startActivity(intent)
         }
+
+
+        moreInFlowconsume()
     }
 
     private fun consume() {
@@ -95,6 +95,38 @@ class MainActivity : AppCompatActivity() {
         list.add(getUser(2))
         list.add(getUser(3))
         return list
+    }
+    private fun moreInFlow()=flow<Int>{
+        val listOfNumbers = listOf(1,2,3,4,5,6,7,8,9,10)
+
+        listOfNumbers.forEach {
+            delay(1000)
+            emit(it)
+        }
+    }
+
+    private fun moreInFlowconsume(){
+        GlobalScope.launch {
+            val numbers= moreInFlow()
+            numbers.onStart {
+                emit(-5)
+                Log.d("FLOW","STARTING")
+            }
+                .map {
+                    it*5
+                }
+                .filter {
+                    it%2==0
+                }
+                .onEach {
+                    Log.d("FLOW","EMITTING - ${it}")
+                }
+                .onCompletion {
+                    Log.d("FLOW","COMPLETED")
+                }
+                .collect()
+
+        }
     }
 
     private suspend fun getUser(id: Int): String {
