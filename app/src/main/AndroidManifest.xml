@@ -12,6 +12,9 @@
         android:theme="@style/Theme.LifecycleAwareComponents"
         tools:targetApi="31">
         <activity
+            android:name=".SharedFlowPrac"
+            android:exported="false" />
+        <activity
             android:name=".FlowActivity"
             android:exported="false" />
         <activity
