@@ -44,6 +44,7 @@ class FlowActivity : AppCompatActivity() {
         }
     }
 
+
     private fun producePersonFlow() = flow<person> {
 
         val person1 = person("Yash", 21)

@@ -39,6 +39,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnIncrease.setOnClickListener {
             increase()
+            viewModel.increaseSecondCounter()
+
+            Log.d("SECONDCount",viewModel.secondCounter.toString())
         }
 
         CoroutineScope(Dispatchers.Main).launch {
@@ -59,6 +62,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnFlow.setOnClickListener {
             val intent = Intent(this@MainActivity,FlowActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnSharedFlow.setOnClickListener {
+            val intent =Intent(this@MainActivity,SharedFlowPrac::class.java)
             startActivity(intent)
         }
 

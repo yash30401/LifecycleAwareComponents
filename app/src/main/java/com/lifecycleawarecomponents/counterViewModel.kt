@@ -8,12 +8,17 @@ class counterViewModel(val initialVal:Int):androidx.lifecycle.ViewModel() {
 
     var count:Int=initialVal
 
+    var secondCounter=2
+
     init {
         fruits=MutableLiveData("Apple")
         listFruits=fruits
 
     }
 
+    fun increaseSecondCounter(){
+        secondCounter++
+    }
 
     fun icrease(){
         count++
